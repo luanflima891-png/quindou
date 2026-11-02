@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.webkit.*;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.FrameLayout;
 import androidx.webkit.WebViewAssetLoader;
 
 public class MainActivity extends Activity {
@@ -17,13 +18,15 @@ public class MainActivity extends Activity {
         web = new WebView(this);
         web.setBackgroundColor(0xfff7f7f2);
         // Fit content around system bars, including Android 15 edge-to-edge.
-        web.setOnApplyWindowInsetsListener((view, insets) -> {
+        FrameLayout root = new FrameLayout(this);
+        root.addView(web, new FrameLayout.LayoutParams(-1, -1));
+        root.setOnApplyWindowInsetsListener((view, insets) -> {
             view.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
                 insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
             return insets;
         });
-        setContentView(web);
-        web.requestApplyInsets();
+        setContentView(root);
+        root.requestApplyInsets();
         WebSettings settings = web.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);

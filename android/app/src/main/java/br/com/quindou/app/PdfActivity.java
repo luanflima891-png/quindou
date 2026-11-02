@@ -68,7 +68,7 @@ public class PdfActivity extends Activity {
                 bitmap=Bitmap.createBitmap(Math.max(1,width),height,Bitmap.Config.ARGB_8888);bitmap.eraseColor(Color.WHITE);
                 page.render(bitmap,null,null,PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
                 final Bitmap ready=bitmap;
-                runOnUiThread(()->{if(closed){ready.recycle();return;}image.setImageBitmap(ready);Bitmap old=shown;shown=ready;if(old!=null)old.recycle();image.setContentDescription("Página "+(index+1)+" de "+pageCount);setLoading(false);});
+                runOnUiThread(()->{if(closed){ready.recycle();return;}image.setLayoutParams(new android.widget.FrameLayout.LayoutParams(ready.getWidth(),ready.getHeight()));image.setImageBitmap(ready);Bitmap old=shown;shown=ready;if(old!=null)old.recycle();image.setContentDescription("Página "+(index+1)+" de "+pageCount);setLoading(false);});
             }catch(Exception|OutOfMemoryError e){if(bitmap!=null)bitmap.recycle();showError("Não foi possível renderizar esta página. Tente outro PDF.");}
         });
     }
