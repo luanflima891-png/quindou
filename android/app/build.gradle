@@ -9,7 +9,7 @@ android {
         versionCode 2
         versionName '1.1.0'
     }
-    testOptions { unitTests.includeAndroidResources = true }
+    testOptions { unitTests.includeAndroidResources = true; unitTests.all { testLogging { exceptionFormat = "full"; events "failed", "passed" } } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
     buildTypes { debug { debuggable true } }
 }

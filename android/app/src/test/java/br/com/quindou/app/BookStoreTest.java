@@ -20,8 +20,7 @@ public class BookStoreTest {
     private Context context;private String owner;private byte[] sample;
     @Before public void setup()throws Exception{
         context=RuntimeEnvironment.getApplication();owner=UUID.randomUUID().toString();
-        PdfDocument document=new PdfDocument();for(int i=0;i<3;i++){PdfDocument.Page page=document.startPage(new PdfDocument.PageInfo.Builder(320,480,i+1).create());page.getCanvas().drawColor(android.graphics.Color.WHITE);document.finishPage(page);}
-        ByteArrayOutputStream bytes=new ByteArrayOutputStream();document.writeTo(bytes);document.close();sample=bytes.toByteArray();
+        try(InputStream in=getClass().getClassLoader().getResourceAsStream("sample.pdf")){assertNotNull(in);sample=in.readAllBytes();}
     }
     @Test public void importedCopySurvivesSourceLossAndReopening()throws Exception{
         File original=new File(context.getCacheDir(),UUID.randomUUID()+".pdf");try(OutputStream out=new FileOutputStream(original)){out.write(sample);}
