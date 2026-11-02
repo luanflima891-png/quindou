@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.INTERNET"/>
   <application android:allowBackup="false" android:label="Quindou" android:icon="@drawable/ic_quindou" android:roundIcon="@drawable/ic_quindou" android:theme="@style/QuindouTheme" android:usesCleartextTraffic="false" android:supportsRtl="true">
     <activity android:name=".PdfActivity" android:exported="false" />
     <activity android:name=".MainActivity" android:exported="true">
