@@ -5,22 +5,19 @@ import android.graphics.pdf.PdfDocument;
 import org.json.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.GraphicsMode;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.platform.app.InstrumentationRegistry;
 import java.io.*;
 import java.util.UUID;
 import static org.junit.Assert.*;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(sdk=28)
-@GraphicsMode(GraphicsMode.Mode.NATIVE)
+@RunWith(AndroidJUnit4.class)
 public class BookStoreTest {
     private Context context;private String owner;private byte[] sample;
     @Before public void setup()throws Exception{
-        context=RuntimeEnvironment.getApplication();owner=UUID.randomUUID().toString();
-        try(InputStream in=getClass().getClassLoader().getResourceAsStream("sample.pdf")){assertNotNull(in);sample=in.readAllBytes();}
+        context=ApplicationProvider.getApplicationContext();owner=UUID.randomUUID().toString();
+        try(InputStream in=InstrumentationRegistry.getInstrumentation().getContext().getAssets().open("sample.pdf")){assertNotNull(in);ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1)out.write(b,0,n);sample=out.toByteArray();}
     }
     @Test public void importedCopySurvivesSourceLossAndReopening()throws Exception{
         File original=new File(context.getCacheDir(),UUID.randomUUID()+".pdf");try(OutputStream out=new FileOutputStream(original)){out.write(sample);}
