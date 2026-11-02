@@ -1,6 +1,6 @@
 const CACHE = 'quindou-shell-v2';
 const BASE = new URL('./', self.location.href);
-const SHELL = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
+const SHELL = ['./', './index.html', './styles.css?v=2', './app.js?v=2', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL.map(path => new URL(path, BASE).href))));
 });
