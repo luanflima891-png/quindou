@@ -1,0 +1,54 @@
+name: Android APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['android/**', '.github/workflows/android-apk.yml']
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Include current web library
+        run: |
+          mkdir -p android/app/src/main/assets/icons
+          cp index.html styles.css app.js manifest.webmanifest android/app/src/main/assets/
+          cp icons/*.png android/app/src/main/assets/icons/
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('android/app/src/main/assets/app.js')
+          p.write_text(p.read_text().replace("if('serviceWorker' in navigator)", "if(false && 'serviceWorker' in navigator)"))
+          PY
+      - name: Build installable test APK
+        working-directory: android
+        run: gradle --no-daemon :app:assembleDebug :app:lintDebug
+      - name: Verify APK
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk Quindou-1.0.0.apk
+          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BUILD_TOOLS/apksigner" verify --verbose Quindou-1.0.0.apk
+          "$BUILD_TOOLS/aapt" dump badging Quindou-1.0.0.apk
+          sha256sum Quindou-1.0.0.apk > Quindou-1.0.0.apk.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Quindou-Android-1.0.0
+          path: |
+            Quindou-1.0.0.apk
+            Quindou-1.0.0.apk.sha256
+            android/app/build/reports/lint-results-debug.html
+      - name: Publish direct download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create android-v1.0.0 Quindou-1.0.0.apk Quindou-1.0.0.apk.sha256 --target "$GITHUB_SHA" --title 'Quindou Android 1.0.0 — teste' --prerelease --notes 'APK de teste assinado com chave de depuração. Biblioteca demonstrativa incorporada, seleção de PDF pelo Android e leitor nativo com páginas e zoom. Android 7 ou superior. PDFs não são enviados e não ficam salvos na biblioteca nesta versão. Uma futura compilação com outra chave pode exigir desinstalação.'
