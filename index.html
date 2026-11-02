@@ -1,38 +1,26 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#162b28">
-  <meta name="description" content="Quindou: seu espaço para ler. Base PWA para um leitor de PDF.">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icons/icon-192.png" type="image/png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
-  <link rel="stylesheet" href="./styles.css">
-  <title>Quindou — Seu espaço para ler</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7f2"><meta name="description" content="Quindou — sua biblioteca, seu próximo universo.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png"><link rel="stylesheet" href="./styles.css"><title>Quindou — Minha biblioteca</title>
 </head>
 <body>
-  <header><a class="brand" href="./" aria-label="Quindou, início">quindou<span>●</span></a><button id="install" hidden>Instalar aplicativo</button></header>
-  <main>
-    <p class="eyebrow">UM TEMPO SÓ SEU</p>
-    <h1>Abra um livro.<br>Descubra outro mundo.</h1>
-    <p class="intro">Seu próximo capítulo começa aqui. Escolha um PDF do seu dispositivo para abrir uma prévia.</p>
-    <section class="upload" aria-labelledby="library-title">
-      <div class="book" aria-hidden="true">Q</div>
-      <h2 id="library-title">Sua leitura, no seu ritmo.</h2>
-      <p>O arquivo fica neste dispositivo e não é enviado para um servidor.</p>
-      <label class="primary" for="pdf-file">Escolher meu PDF <span aria-hidden="true">↗</span></label>
-      <input id="pdf-file" type="file" accept="application/pdf,.pdf">
-      <p class="note">Base PWA · prévia pelo visualizador do navegador</p>
-    </section>
-    <p id="status" role="status" aria-live="polite"></p>
-    <section id="reader" hidden aria-labelledby="filename">
-      <div class="reader-bar"><h2 id="filename"></h2><button id="close">Fechar</button></div>
-      <p>A prévia depende do suporte do seu navegador. <a id="open-pdf" target="_blank" rel="noopener">Abrir PDF em outra aba</a></p>
-      <iframe id="pdf-preview" title="Prévia do PDF"></iframe>
-    </section>
-    <footer>QUINDOU <span>Leitura para todos.</span><p>Preparado para receber um leitor completo com páginas, zoom e biblioteca offline.</p></footer>
-  </main>
-  <script type="module" src="./app.js"></script>
-</body>
-</html>
+<aside class="sidebar">
+<a class="brand" href="./" aria-label="Quindou, início"><span class="brand-icon">q</span> quindou<span class="brand-dot">.</span></a>
+<p class="sidebar-label">SEU UNIVERSO DE LEITURA</p>
+<nav aria-label="Biblioteca"><button class="nav-item active" data-view="all"><span data-icon="library"></span>Minha biblioteca <small id="nav-count">8</small></button><button class="nav-item" data-view="reading"><span data-icon="book"></span>Em leitura <small>3</small></button><button class="nav-item" data-view="favorites"><span data-icon="heart"></span>Favoritos <small id="fav-count">2</small></button><button class="nav-item" data-view="finished"><span data-icon="check"></span>Concluídos <small>2</small></button></nav>
+<div class="sidebar-bottom"><div class="little-note"><span data-icon="spark"></span><h3>Um capítulo por dia.<br>Um mundo de diferença.</h3><p>Seu próximo momento favorito pode estar na próxima página.</p></div><button id="install" class="install" hidden><span data-icon="download"></span>Instalar Quindou</button><div class="profile"><span class="avatar">L</span><div><strong>Luan</strong><small>Meu espaço de leitura</small></div><span class="profile-dot"></span></div></div>
+</aside>
+<div class="workspace"><header class="topbar"><span class="breadcrumb">Meu espaço <span>/</span> <strong>Biblioteca</strong></span><div class="top-tools"><span class="local-badge"><i></i> Arquivos no seu dispositivo</span><span class="avatar mini">L</span></div></header>
+<main>
+<div class="page-heading"><div><div class="eyebrow">BOM TER VOCÊ POR AQUI, LUAN</div><h1>Sua próxima página começa aqui<span>.</span></h1><p>Histórias para se perder. Ideias para se encontrar.</p></div><label class="primary upload-button" for="pdf-file"><span data-icon="plus"></span>Adicionar PDF</label><input id="pdf-file" type="file" accept="application/pdf,.pdf" class="sr-only"></div>
+<section class="feature-row" aria-label="Destaque de leitura"><div class="hero"><div class="hero-copy"><span class="tag"><span class="tiny-dot"></span> CONTINUE SUA JORNADA</span><h2>Um pequeno hábito.<br>Infinitas possibilidades.</h2><p>Reserve um tempo para você.<br>O resto do mundo pode esperar um capítulo.</p><button class="dark-button" id="continue">Continuar lendo <span data-icon="arrow"></span></button><span class="hero-progress">A arte de recomeçar <b>·</b> 42% lido</span></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="star star-one">✦</span><span class="star star-two">✧</span><div class="hero-book"><div class="cover-mark">Q / ESSENCIAIS</div><div class="hero-book-title">A arte de<br><em>recomeçar</em></div><div class="cover-sun"></div><div class="cover-arch"></div><small>CLARA VENTURA</small></div><div class="floating-label"><span>✦</span> Só mais um capítulo</div></div></div>
+<div class="reading-card"><div class="stat-head"><span data-icon="chart"></span><span>SEU RITMO</span><span class="demo-pill">DEMO</span></div><div class="reading-number">02<span>/ 12 livros</span></div><p>Uma página de cada vez.<br>Você está construindo seu ritmo.</p><div class="month-chart" aria-label="Atividade ilustrativa da semana"><div style="--h:34%"><span>S</span></div><div style="--h:62%"><span>T</span></div><div style="--h:44%"><span>Q</span></div><div style="--h:85%"><span>Q</span></div><div style="--h:53%"><span>S</span></div><div class="current" style="--h:100%"><span>S</span></div><div style="--h:24%"><span>D</span></div></div><div class="stat-footer"><span class="stat-bubble" data-icon="spark"></span><span>Seu melhor investimento<br><strong>é um tempo para você.</strong></span></div></div></section>
+<section class="library" aria-labelledby="library-title"><div class="section-heading"><div><h2 id="library-title">Minha biblioteca <span id="book-count">8 livros</span></h2><p class="demo-note"><span></span>Coleção demonstrativa · títulos, capas e progresso ilustrativos</p></div><div class="display-controls"><button id="grid-view" class="selected icon-button" aria-label="Exibir em grade" aria-pressed="true"><span data-icon="grid"></span></button><button id="list-view" class="icon-button" aria-label="Exibir em lista" aria-pressed="false"><span data-icon="list"></span></button></div></div>
+<div class="library-tools"><div class="filters" aria-label="Filtrar livros"><button class="filter active" data-filter="all">Todos</button><button class="filter" data-filter="Desenvolvimento">Desenvolvimento</button><button class="filter" data-filter="Ficção">Ficção</button><button class="filter" data-filter="Criatividade">Criatividade</button><button class="filter" data-filter="Negócios">Negócios</button></div><div class="search-sort"><label class="search"><span data-icon="search"></span><input id="search" type="search" placeholder="Buscar na biblioteca" aria-label="Buscar na biblioteca"></label><select id="sort" aria-label="Ordenar biblioteca"><option value="recent">Mais recentes</option><option value="title">Título A–Z</option><option value="progress">Progresso</option></select></div></div>
+<div id="books" class="books"></div><p id="empty" class="empty" hidden>Nenhum livro por aqui. Experimente outra busca ou adicione um PDF.</p></section>
+<p id="status" role="status" aria-live="polite"></p><footer><span class="footer-brand">quindou.</span><span>Menos distração. Mais histórias.</span><span class="footer-local"><i></i> Seu espaço, no seu ritmo.</span></footer>
+</main></div>
+<dialog id="book-dialog"><form method="dialog"><button class="dialog-close icon-button" aria-label="Fechar detalhes"><span data-icon="close"></span></button></form><div id="dialog-content"></div></dialog>
+<dialog id="reader"><div class="reader-bar"><h2 id="filename"></h2><button id="close" class="icon-button" aria-label="Fechar PDF"><span data-icon="close"></span></button></div><p class="reader-note">Prévia pelo navegador. <a id="open-pdf" target="_blank" rel="noopener">Abrir PDF em outra aba ↗</a></p><iframe id="pdf-preview" title="Prévia do PDF"></iframe></dialog>
+<script type="module" src="./app.js"></script></body></html>

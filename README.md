@@ -2,6 +2,10 @@
 
 Base estática PWA para um leitor de PDF, sem dependências ou backend. Compatível com GitHub Pages em `/quindou/` graças a caminhos relativos.
 
+## Biblioteca demonstrativa
+
+Interface com oito títulos fictícios, capas originais desenhadas em CSS, categorias, busca por título/autor, ordenação, favoritos locais e visualização em grade/lista. Progresso, atividade semanal, autores e meta são dados ilustrativos. Os cartões abrem detalhes e um trecho original demonstrativo; não há arquivos completos por trás deles. PDFs importados ficam acessíveis somente na sessão atual e não são enviados ao servidor.
+
 ## O que está pronto
 
 - Interface responsiva em português.
