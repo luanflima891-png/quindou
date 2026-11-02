@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#162b28">
+  <meta name="description" content="Quindou: seu espaço para ler. Base PWA para um leitor de PDF.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Quindou — Seu espaço para ler</title>
+</head>
+<body>
+  <header><a class="brand" href="./" aria-label="Quindou, início">quindou<span>●</span></a><button id="install" hidden>Instalar aplicativo</button></header>
+  <main>
+    <p class="eyebrow">UM TEMPO SÓ SEU</p>
+    <h1>Abra um livro.<br>Descubra outro mundo.</h1>
+    <p class="intro">Seu próximo capítulo começa aqui. Escolha um PDF do seu dispositivo para abrir uma prévia.</p>
+    <section class="upload" aria-labelledby="library-title">
+      <div class="book" aria-hidden="true">Q</div>
+      <h2 id="library-title">Sua leitura, no seu ritmo.</h2>
+      <p>O arquivo fica neste dispositivo e não é enviado para um servidor.</p>
+      <label class="primary" for="pdf-file">Escolher meu PDF <span aria-hidden="true">↗</span></label>
+      <input id="pdf-file" type="file" accept="application/pdf,.pdf">
+      <p class="note">Base PWA · prévia pelo visualizador do navegador</p>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="reader" hidden aria-labelledby="filename">
+      <div class="reader-bar"><h2 id="filename"></h2><button id="close">Fechar</button></div>
+      <p>A prévia depende do suporte do seu navegador. <a id="open-pdf" target="_blank" rel="noopener">Abrir PDF em outra aba</a></p>
+      <iframe id="pdf-preview" title="Prévia do PDF"></iframe>
+    </section>
+    <footer>QUINDOU <span>Leitura para todos.</span><p>Preparado para receber um leitor completo com páginas, zoom e biblioteca offline.</p></footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
